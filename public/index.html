@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Academy</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Orbitron, Montserrat, and Poppins for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@rive-app/canvas@latest/dist/rive.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@latest"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top cyber-navbar">
+      <style>
+        .cyber-navbar {
+          background: linear-gradient(90deg, #0f2027 0%, #2c5364 100%) !important;
+          box-shadow: 0 2px 16px #00ffea99 !important;
+          border-bottom: 2px solid #00ffea44;
+        }
+        .cyber-navbar .navbar-brand {
+          font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;
+          font-size: 2rem;
+          letter-spacing: 2.5px;
+          color: #00ffea !important;
+          text-shadow: 0 2px 12px #00ffea99;
+        }
+        .cyber-navbar .nav-link {
+          font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+          font-weight: 600;
+          color: #fff !important;
+          transition: color 0.2s, background 0.2s;
+        }
+        .cyber-navbar .nav-link:hover, .cyber-navbar .nav-link.active {
+          color: #00ffea !important;
+          background: #222c3a;
+        }
+        .cyber-navbar .btn-success {
+          background: linear-gradient(90deg,#00ffea 0%,#28a745 100%);
+          border: none;
+          color: #101820;
+          font-weight: 700;
+          box-shadow: 0 2px 12px #00ffea44;
+        }
+        .cyber-navbar .btn-success:hover {
+          background: linear-gradient(90deg,#28a745 0%,#00ffea 100%);
+          color: #fff;
+        }
+        html {
+          height: auto;
+          min-height: 100%;
+          background: #101820;
+          overflow-x: hidden;
+        }
+        body {
+          min-height: 100vh;
+          background: #101820;
+          overflow-x: hidden;
+          position: relative;
+        }
+        main {
+          min-height: 60vh;
+        }
+      </style>
+      <div class="container-fluid px-4">
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold fs-3" href="#" style="letter-spacing: 2px;">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/hacker.png" alt="Cyber Academy Logo" width="36" height="36" style="filter: drop-shadow(0 2px 6px #0008);">
+          Cyber Academy
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav align-items-center gap-lg-3">
+            <li class="nav-item">
+              <a class="nav-link px-3 rounded-pill fw-semibold text-white" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-3 rounded-pill fw-semibold text-white" href="#courses">Courses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-3 rounded-pill fw-semibold text-white" href="#community">Community</a>
+            </li>
+          </ul>
+          <a href="#courses" class="btn btn-success rounded-pill px-4 py-2 ms-lg-4 shadow-sm fw-bold d-none d-lg-inline-flex" style="letter-spacing:1px;">Join Now</a>
+        </div>
+      </div>
+    </nav>
+    <header class="hero-section position-relative overflow-hidden d-flex align-items-center justify-content-center text-center" style="min-height: 100vh; background: linear-gradient(120deg, #0f2027 0%, #2c5364 100%); margin-top: 56px; font-family: 'Orbitron', 'Montserrat', Arial, sans-serif;">
+      <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b43?auto=format&fit=crop&w=1500&q=80" alt="Cyber Security Background" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover hero-bg-img" style="opacity:0.22;z-index:0;pointer-events:none;">
+      <!-- Cyber grid overlay for extra visual effect -->
+      <!-- Animated cyber grid overlay -->
+      <div class="position-absolute top-0 start-0 w-100 h-100" style="z-index:1; pointer-events:none;">
+        <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="none" style="position:absolute;top:0;left:0;width:100%;height:100%;animation: grid-move 12s linear infinite alternate;">
+          <defs>
+            <linearGradient id="cyberGrid" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00ffea44"/>
+              <stop offset="100%" stop-color="#00ffea00"/>
+            </linearGradient>
+          </defs>
+          <g stroke="url(#cyberGrid)" stroke-width="1">
+            <line x1="10%" y1="0" x2="10%" y2="100%"/>
+            <line x1="20%" y1="0" x2="20%" y2="100%"/>
+            <line x1="30%" y1="0" x2="30%" y2="100%"/>
+            <line x1="40%" y1="0" x2="40%" y2="100%"/>
+            <line x1="50%" y1="0" x2="50%" y2="100%"/>
+            <line x1="60%" y1="0" x2="60%" y2="100%"/>
+            <line x1="70%" y1="0" x2="70%" y2="100%"/>
+            <line x1="80%" y1="0" x2="80%" y2="100%"/>
+            <line x1="90%" y1="0" x2="90%" y2="100%"/>
+            <line x1="0" y1="10%" x2="100%" y2="10%"/>
+            <line x1="0" y1="20%" x2="100%" y2="20%"/>
+            <line x1="0" y1="30%" x2="100%" y2="30%"/>
+            <line x1="0" y1="40%" x2="100%" y2="40%"/>
+            <line x1="0" y1="50%" x2="100%" y2="50%"/>
+            <line x1="0" y1="60%" x2="100%" y2="60%"/>
+            <line x1="0" y1="70%" x2="100%" y2="70%"/>
+            <line x1="0" y1="80%" x2="100%" y2="80%"/>
+            <line x1="0" y1="90%" x2="100%" y2="90%"/>
+          </g>
+        </svg>
+      </div>
+      <style>
+        @keyframes grid-move {
+          0% { filter: hue-rotate(0deg) brightness(1); }
+          100% { filter: hue-rotate(60deg) brightness(1.2); }
+        }
+      </style>
+      <div class="container position-relative z-2">
+        <h1 class="display-3 display-md-1 fw-bold text-white mb-3 mb-md-4 gsap-fade" style="font-family: 'Orbitron', 'Poppins', sans-serif; letter-spacing: 0.12em; text-shadow: 0 2px 24px #00ffea99;">
+          <span style="background: linear-gradient(90deg,#00ffea,#2c5364 80%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-fill-color:transparent;">Cyber Academy</span>
+        </h1>
+        <p class="lead text-white-50 mb-4 mb-md-5 gsap-hero-animate" id="cyber-animated-text" style="font-family: 'Poppins', 'Montserrat', Arial, sans-serif; font-size: 1.2rem;">
+          <span class="cyber-typing"></span>
+        </p>
+        <img src="https://img.icons8.com/ios-filled/200/00ffea/hacker.png" alt="Cyber Academy Logo" class="img-fluid rounded-circle shadow-lg mb-3 mb-md-4 gsap-img hero-main-img" style="background:#101820; max-width: 220px; border: 6px solid #00ffea; box-shadow: 0 0 32px #00ffea99, 0 2px 16px #0008; filter: drop-shadow(0 0 32px #00ffea88);">
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 gsap-fade">
+          <a href="#courses" class="btn btn-primary btn-lg px-4 px-md-5 mb-2 mb-md-0" style="font-family: 'Poppins', 'Montserrat', sans-serif; font-weight:700;">Get Started</a>
+          <a href="#about" class="btn btn-outline-light btn-lg px-4 px-md-5 mb-2 mb-md-0" style="font-family: 'Poppins', 'Montserrat', sans-serif; font-weight:700;">Learn More</a>
+          <a href="https://www.mcyberacademy.in/"><span class="btn btn-success btn-lg px-4 px-md-5" style="pointer-events:none; user-select:none; animation: cyber-fade 2s infinite alternate; font-family: 'Poppins', 'Montserrat', sans-serif; font-weight:700;">Cyber Academy</span></a>
+          
+        </div>
+        <div class="mt-4 row justify-content-center align-items-center gx-2 gsap-fade">
+          <div class="col-12 col-md-6 mb-3 mb-md-0">
+            <div class="text-start bg-dark bg-opacity-75 rounded-4 p-3 shadow-lg w-100 h-100">
+              <h3 class="text-info mb-2" style="font-family: 'Orbitron', 'Montserrat', sans-serif; font-size:1.1rem;">Unlock Your Cyber Potential</h3>
+              <p class="text-white-50 mb-0" style="font-size:0.98rem;">Join a vibrant community, access hands-on labs, and earn industry-recognized certifications.</p>
+            </div>
+          </div>
+          <div class="col-8 col-md-4 text-center">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80" alt="Cyber Learning" class="rounded-4 shadow-lg w-100" style="max-width: 180px; min-width: 100px; border: 3px solid #00ffea;">
+          </div>
+        </div>
+      </div>
+    <style>
+    @media (max-width: 767.98px) {
+      .hero-section {
+        min-height: 80vh !important;
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+      }
+      .hero-bg-img {
+        height: 80vh !important;
+        object-position: center top;
+      }
+      .hero-main-img {
+        max-width: 100px !important;
+        border-width: 3px !important;
+      }
+      .display-3, .display-md-1 {
+        font-size: 1.5rem !important;
+        line-height: 1.2;
+      }
+      .lead, #cyber-animated-text {
+        font-size: 1rem !important;
+      }
+      .btn-lg {
+        font-size: 0.95rem !important;
+        padding: 0.6rem 1.2rem !important;
+      }
+      .mt-5 {
+        margin-top: 2rem !important;
+      }
+      .gap-4 {
+        gap: 1rem !important;
+      }
+      .rounded-4 {
+        border-radius: 1rem !important;
+      }
+    }
+    @media (max-width: 400px) {
+      .display-3, .display-md-1 {
+        font-size: 1.1rem !important;
+      }
+      .lead, #cyber-animated-text {
+        font-size: 0.85rem !important;
+      }
+    }
+    .cyber-typing {
+      border-right: 2px solid #00ffea;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      min-width: 10px;
+      font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+      font-size: 1.2rem;
+      color: #00ffea;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 8px #00ffea99;
+      background: linear-gradient(90deg,#00ffea,#2c5364 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    </style>
+      <canvas id="rive-canvas" width="800" height="400" class="position-absolute bottom-0 start-50 translate-middle-x w-100" style="pointer-events:none; z-index:1;"></canvas>
+      <div class="w-100 d-flex justify-content-center align-items-center position-absolute bottom-0 start-50 translate-middle-x" style="z-index:2; pointer-events:none;">
+        <!-- Rive animation container -->
+        <canvas id="rive-hero" width="320" height="180" style="background:transparent;"></canvas>
+      </div>
+      <style>
+      @keyframes cyber-fade {
+        0% { background-color: #28a745; color: #fff; letter-spacing: 0.1em; box-shadow: 0 0 10px #28a74544; }
+        100% { background-color: #218838; color: #fff; letter-spacing: 0.25em; box-shadow: 0 0 30px #28a74599; }
+      }
+      .object-fit-cover { object-fit: cover; height: 100vh !important; }
+      .hero-main-img {
+        transition: box-shadow 0.4s, border-color 0.4s;
+      }
+      .hero-main-img:hover {
+        box-shadow: 0 0 64px #00ffea, 0 2px 32px #000a;
+        border-color: #fff;
+      }
+      #cyber-animated-text {
+        font-family: 'Orbitron', 'Montserrat', 'Segoe UI', Arial, sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      </style>
+    </header>
+    <!-- SVG Section Divider: Hero to About -->
+    <div style="width:100%;overflow:hidden;line-height:0;position:relative;top:-1px;z-index:2;">
+      <svg viewBox="0 0 1440 80" width="100%" height="80" preserveAspectRatio="none" style="display:block;"><polygon fill="#f8fafc" fill-opacity="1" points="0,0 1440,80 0,80"/></svg>
+    </div>
+    <main class="container-fluid px-0" style="font-family:'Montserrat',Arial,sans-serif;">
+        <section id="about" class="py-5 bg-light text-center" style="position:relative;z-index:3;">
+            <div class="container">
+                <h2 class="display-5 mb-4 gsap-fade" style="font-family: 'Orbitron', 'Montserrat', sans-serif;">Why Choose Cyber Academy?</h2>
+                <div class="row justify-content-center align-items-stretch g-4">
+                    <div class="col-md-3 col-6">
+                        <div class="about-card card border-0 shadow h-100 gsap-card text-center p-3 position-relative overflow-hidden">
+                            <div class="about-icon mb-3 mx-auto"><img src="https://img.icons8.com/ios-filled/80/00ffea/artificial-intelligence.png" alt="AI-Powered Labs" width="56"></div>
+                            <h5 class="card-title">AI-Powered Labs</h5>
+                            <p class="card-text">Experience hands-on learning with real-world cyber attack simulations and AI-driven feedback.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="about-card card border-0 shadow h-100 gsap-card text-center p-3 position-relative overflow-hidden">
+                            <div class="about-icon mb-3 mx-auto"><img src="https://img.icons8.com/ios-filled/80/00ffea/online-group-studying.png" alt="Expert Community" width="56"></div>
+                            <h5 class="card-title">Expert Community</h5>
+                            <p class="card-text">Join a global network of mentors, professionals, and learners. Collaborate, compete, and grow together.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="about-card card border-0 shadow h-100 gsap-card text-center p-3 position-relative overflow-hidden">
+                            <div class="about-icon mb-3 mx-auto"><img src="https://img.icons8.com/ios-filled/80/00ffea/medal2--v1.png" alt="Certifications" width="56"></div>
+                            <h5 class="card-title">Industry Certifications</h5>
+                            <p class="card-text">Earn globally recognized certificates and digital badges to boost your cyber career.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="about-card card border-0 shadow h-100 gsap-card text-center p-3 position-relative overflow-hidden">
+                            <div class="about-icon mb-3 mx-auto"><img src="https://img.icons8.com/ios-filled/80/00ffea/rocket--v1.png" alt="Career Launchpad" width="56"></div>
+                            <h5 class="card-title">Career Launchpad</h5>
+                            <p class="card-text">Get personalized guidance, resume reviews, and job placement support from cyber experts.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 align-items-center justify-content-center gsap-fade">
+                  <div class="col-md-7 text-center mx-auto">
+                    <h3 class="text-primary mb-2" style="font-family: 'Orbitron', 'Montserrat', sans-serif; font-size:1.1rem;">Our Mission</h3>
+                    <p class="lead" style="font-size:1rem;">Empowering everyone to become a cyber defender. <span class="text-cyber-gradient">Learn by doing, earn by growing, and lead the future of cybersecurity.</span></p>
+                  </div>
+                </div>
+                <div class="row mt-5 gx-4 gy-4 align-items-center justify-content-center">
+                  <div class="col-md-4 col-12 mb-4 mb-md-0">
+                    <div class="about-extra-card card border-0 shadow-lg h-100 text-start p-4 bg-white bg-opacity-75">
+                      <h5 class="mb-3 text-info" style="font-family: 'Orbitron', 'Montserrat', sans-serif;">What Makes Us Unique?</h5>
+                      <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><span class="badge bg-success me-2">1</span> 24/7 access to interactive cyber labs and challenges.</li>
+                        <li class="mb-2"><span class="badge bg-success me-2">2</span> Real-time feedback and AI-powered progress tracking.</li>
+                        <li class="mb-2"><span class="badge bg-success me-2">3</span> Live webinars, hackathons, and expert AMAs every month.</li>
+                        <li class="mb-2"><span class="badge bg-success me-2">4</span> Community-driven projects and peer code reviews.</li>
+                        <li class="mb-2"><span class="badge bg-success me-2">5</span> Scholarships and rewards for top learners.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-12 mb-4 mb-md-0">
+                    <div class="about-extra-card card border-0 shadow-lg h-100 text-center p-4 bg-white bg-opacity-75">
+                      <img src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&w=400&q=80" alt="Cyber Teamwork" class="img-fluid rounded-4 mb-3" style="max-width: 220px; border: 3px solid #00ffea;">
+                      <h5 class="mb-2 text-success">Global Cyber Community</h5>
+                      <p class="mb-0">Connect with thousands of learners and professionals worldwide. Share, learn, and grow together in a safe, inclusive environment.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-12">
+                    <div class="about-extra-card card border-0 shadow-lg h-100 text-center p-4 bg-white bg-opacity-75">
+                      <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=400&q=80" alt="Cyber Success" class="img-fluid rounded-4 mb-3" style="max-width: 220px; border: 3px solid #00ffea;">
+                      <h5 class="mb-2 text-primary">Your Success, Our Goal</h5>
+                      <p class="mb-0">From beginner to pro, we support your journey with mentorship, career guidance, and a path to real-world impact.</p>
+                    </div>
+                  </div>
+                </div>
+            <style>
+                .about-extra-card {
+                  border-radius: 1.5rem;
+                  background: linear-gradient(120deg, #f8fafc 90%, #00ffea11 100%);
+                  box-shadow: 0 4px 32px #00ffea11, 0 2px 8px #0002;
+                  transition: box-shadow 0.4s, transform 0.4s;
+                }
+                .about-extra-card:hover {
+                  box-shadow: 0 8px 48px #00ffea33, 0 4px 16px #0002;
+                  transform: translateY(-8px) scale(1.03);
+                }
+            </style>
+            </div>
+            <style>
+                .about-card {
+                  border-radius: 1.5rem;
+                  background: linear-gradient(120deg, #f8fafc 80%, #00ffea11 100%);
+                  transition: transform 0.4s cubic-bezier(.4,2,.3,1), box-shadow 0.4s;
+                  box-shadow: 0 4px 32px #00ffea11, 0 2px 8px #0002;
+                  overflow: hidden;
+                  position: relative;
+                }
+                .about-card:hover {
+                  transform: translateY(-10px) scale(1.04) rotate(-1deg);
+                  box-shadow: 0 8px 48px #00ffea33, 0 4px 16px #0002;
+                  z-index: 2;
+                }
+                .about-icon img {
+                  filter: drop-shadow(0 0 16px #00ffea88);
+                  background: #101820;
+                  border-radius: 50%;
+                  padding: 0.5rem;
+                }
+                .text-cyber-gradient {
+                  background: linear-gradient(90deg,#00ffea,#2c5364 80%);
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  background-clip: text;
+                  color: transparent;
+                }
+            </style>
+        </section>
+        <!-- Course Details Section -->
+        <!-- SVG Section Divider: About to Course Details -->
+        <div style="width:100%;overflow:hidden;line-height:0;position:relative;top:-1px;z-index:2;">
+          <svg viewBox="0 0 1440 80" width="100%" height="80" preserveAspectRatio="none" style="display:block;"><polygon fill="#f8fafc" fill-opacity="1" points="0,80 1440,0 1440,80"/></svg>
+        </div>
+        <section id="course-details" class="py-5 bg-light text-dark text-center" style="position:relative;z-index:3;">
+            <div class="container">
+                <h2 class="display-5 mb-4 gsap-fade" style="font-family: 'Orbitron', 'Montserrat', sans-serif;">Featured Course: Cybersecurity Essentials</h2>
+                <div class="row justify-content-center align-items-center mb-4">
+                    <div class="col-md-6 mb-4 mb-md-0">
+                        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b43?auto=format&fit=crop&w=800&q=80" alt="Cybersecurity Essentials" class="img-fluid rounded-4 shadow-lg w-100" style="max-width: 400px; border: 4px solid #00ffea;">
+                    </div>
+                    <div class="col-md-6 text-start">
+                        <div class="bg-white bg-opacity-75 rounded-4 p-4 shadow-lg h-100">
+                            <h3 class="text-info mb-2" style="font-family: 'Orbitron', 'Montserrat', sans-serif;">What You'll Learn</h3>
+                            <ul class="list-unstyled text-dark mb-3">
+                                <li class="mb-2"><span class="badge bg-success me-2">1</span> Cybersecurity fundamentals & best practices</li>
+                                <li class="mb-2"><span class="badge bg-success me-2">2</span> Threats, vulnerabilities, and risk management</li>
+                                <li class="mb-2"><span class="badge bg-success me-2">3</span> Hands-on labs: firewalls, encryption, and more</li>
+                                <li class="mb-2"><span class="badge bg-success me-2">4</span> Real-world case studies & attack simulations</li>
+                                <li class="mb-2"><span class="badge bg-success me-2">5</span> Career guidance & certification prep</li>
+                            </ul>
+                            <a href="https://www.mcyberacademy.in/" class="btn btn-primary btn-lg mt-2">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-md-10">
+                        <div class="alert alert-info shadow-sm mb-0" style="font-size:1.05rem;">
+                            <strong>Next Batch Starts:</strong> August 2025 &nbsp; | &nbsp; <strong>Duration:</strong> 6 Weeks &nbsp; | &nbsp; <strong>Level:</strong> Beginner to Intermediate
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- SVG Section Divider: Course Details to Courses -->
+        <div class="aaaa">
+          <div style="width:100%;overflow:hidden;line-height:0;position:relative;top:-1px;z-index:2;">
+          <svg viewBox="0 0 1440 80" width="100%" height="80" preserveAspectRatio="none" style="display:block;"><polygon fill="#101820" fill-opacity="1" points="0,0 1440,80 0,80"/></svg>
+        </div>
+        <section id="courses" class="py-5 text-center position-relative bg-cyber-courses" style="z-index:3;">
+          <div class="container">
+            <h2 class="display-5 mb-4 gsap-fade" style="font-family: 'Orbitron', 'Montserrat', sans-serif;">Our Top Cyber Courses</h2>
+            <div class="row g-4 justify-content-center align-items-stretch">
+              <div class="col-12 col-md-6 col-lg-3">
+                <div class="cyber-card h-100 shadow-lg border-0 gsap-card position-relative overflow-hidden">
+                  <div class="cyber-card-img-wrap position-relative">
+                    <img src="https://diy-assets.classplus.co/_next/image?url=https://cdn-wl-assets.classplus.co/production/single/nwqmno/4c38cac7-d880-4540-a94b-3a39f5a7a30c.png&w=828&q=75" class="card-img-top cyber-card-img" alt="Ethical Hacking">
+                    <span class="cyber-card-badge badge bg-success position-absolute top-0 start-0 m-2">Beginner</span>
+                  </div>
+                  <div class="cyber-card-body p-4">
+                    <h5 class="card-title">Python for hacker</h5>
+                    <p class="card-text">Master penetration testing, vulnerability assessment, and ethical hacking tools.</p>
+                    <a href="https://www.mcyberacademy.in/courses/675255" class="btn btn-outline-info btn-sm mt-2 stretched-link">Explore</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3">
+                <div class="cyber-card h-100 shadow-lg border-0 gsap-card position-relative overflow-hidden">
+                  <div class="cyber-card-img-wrap position-relative">
+                    <img src="https://diy-assets.classplus.co/_next/image?url=https://cdn-wl-assets.classplus.co/production/single/nwqmno/f70564fc-20e0-451c-a839-f39b934a2269.png&w=828&q=75" class="card-img-top cyber-card-img" alt="Network Security">
+                    <span class="cyber-card-badge badge bg-primary position-absolute top-0 start-0 m-2">Intermediate</span>
+                  </div>
+                  <div class="cyber-card-body p-4">
+                    <h5 class="card-title">Network Security</h5>
+                    <p class="card-text">Protect networks from threats and learn advanced defense strategies.</p>
+                    <a href="https://www.mcyberacademy.in/courses/668023" class="btn btn-outline-info btn-sm mt-2 stretched-link">Explore</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3">
+                <div class="cyber-card h-100 shadow-lg border-0 gsap-card position-relative overflow-hidden">
+                  <div class="cyber-card-img-wrap position-relative">
+                    <img src="https://diy-assets.classplus.co/_next/image?url=https://cdn-diy-public.classplus.co/prod/logo1removebgpreview_1745840786017.png&w=828&q=75" class="card-img-top cyber-card-img" alt="Digital Forensics">
+                    <span class="cyber-card-badge badge bg-warning text-dark position-absolute top-0 start-0 m-2">All Levels</span>
+                  </div>
+                  <div class="cyber-card-body p-4">
+                    <h5 class="card-title">Cybersecurity Projects</h5>
+                    <p class="card-text">Build real-world cyber projects, participate in challenges, and showcase your skills to employers.</p>
+                    <a href="https://www.mcyberacademy.in/courses/668023" class="btn btn-outline-info btn-sm mt-2 stretched-link">Explore Projects</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-3">
+                <div class="cyber-card h-100 shadow-lg border-0 gsap-card position-relative overflow-hidden">
+                  <div class="cyber-card-img-wrap position-relative">
+                    <img src="https://diy-assets.classplus.co/_next/image?url=https://cdn-wl-assets.classplus.co/production/single/nwqmno/5aaf9279-6b14-4c0b-8736-388764befcb8.png&w=828&q=75" class="card-img-top cyber-card-img" alt="Cloud Security">
+                    <span class="cyber-card-badge badge bg-info text-dark position-absolute top-0 start-0 m-2">Advanced</span>
+                  </div>
+                  <div class="cyber-card-body p-4">
+                    <h5 class="card-title">linux</h5>
+                    <p class="card-text">Secure cloud environments and manage risks in modern infrastructures.</p>
+                    <a href="https://www.mcyberacademy.in/courses/679324" class="btn btn-outline-info btn-sm mt-2 stretched-link">Explore</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-5 align-items-center justify-content-center gsap-fade">
+              <div class="col-md-8 text-center mx-auto">
+                <h3 class="text-success mb-2" style="font-family: 'Orbitron', 'Montserrat', sans-serif; font-size:1.1rem;">Learning That Fits Your Life</h3>
+                <p class="lead" style="font-size:1rem;">Flexible, hands-on, and real-world focused. For beginners and pros alike.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+          <style>
+            .aaaa{
+              color: white;
+            }
+            .bg-cyber-courses {
+              background: linear-gradient(120deg, #101820 60%, #2c5364 100%);
+            }
+            .cyber-card {
+              border-radius: 1.5rem;
+              background: #181f2a;
+              transition: transform 0.4s cubic-bezier(.4,2,.3,1), box-shadow 0.4s;
+              box-shadow: 0 4px 32px #00ffea22, 0 2px 8px #0008;
+              overflow: hidden;
+              position: relative;
+            }
+            .cyber-card:hover {
+              transform: translateY(-16px) scale(1.05) rotate(-1deg);
+              box-shadow: 0 8px 48px #00ffea66, 0 4px 16px #000a;
+              z-index: 2;
+            }
+            .cyber-card-img-wrap {
+              overflow: hidden;
+              border-radius: 1.5rem 1.5rem 0 0;
+              position: relative;
+            }
+            .cyber-card-img {
+              border-radius: 1.5rem 1.5rem 0 0;
+              object-fit: cover;
+              height: 180px;
+              width: 100%;
+              filter: grayscale(0.2) brightness(0.95) contrast(1.1);
+              transition: filter 0.4s, transform 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+            }
+            .cyber-card:hover .cyber-card-img {
+              filter: grayscale(0) brightness(1.1) contrast(1.2) drop-shadow(0 0 16px #00ffea88);
+              transform: scale(1.08) rotate(2deg);
+            }
+            .cyber-card-body {
+              background: linear-gradient(120deg, #101820 80%, #00ffea11 100%);
+              border-radius: 0 0 1.5rem 1.5rem;
+              min-height: 180px;
+              position: relative;
+              z-index: 1;
+            }
+            .cyber-card-badge {
+              font-size: 0.85rem;
+              padding: 0.5em 1em;
+              border-radius: 1em;
+              box-shadow: 0 2px 8px #00ffea44;
+              letter-spacing: 1px;
+              z-index: 2;
+            }
+            .cyber-card .btn {
+              font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+              font-weight: 600;
+              letter-spacing: 1px;
+              border-radius: 2em;
+              transition: background 0.2s, color 0.2s;
+            }
+            .cyber-card .btn-outline-info:hover {
+              background: linear-gradient(90deg,#00ffea,#2c5364 80%);
+              color: #101820;
+              border-color: #00ffea;
+            }
+          </style>
+        </section>
+        <!-- Beginner Journey Section (inspired by mcyberacademy.in) -->
+        <!-- SVG Section Divider: Courses to Beginner Journey -->
+        <div style="width:100%;overflow:hidden;line-height:0;position:relative;top:-1px;z-index:2;">
+          <svg viewBox="0 0 1440 80" width="100%" height="80" preserveAspectRatio="none" style="display:block;"><polygon fill="#181f2a" fill-opacity="1" points="0,80 1440,0 1440,80"/></svg>
+        </div>
+        <section id="beginner-journey" class="py-5 bg-dark text-white position-relative" style="z-index:3;">
+          <div class="container">
+            <h2 class="display-5 mb-5 gsap-fade" style="font-family: 'Orbitron', 'Montserrat', sans-serif;">Beginner Journey</h2>
+            <div class="journey-timeline position-relative mx-auto" style="max-width:900px;">
+              <div class="row g-4 align-items-center justify-content-center">
+                <div class="col-md-3 col-6">
+                  <div class="journey-step card border-0 shadow-lg text-center bg-gradient gsap-card" style="background:linear-gradient(120deg,#101820 60%,#00ffea22 100%);">
+                    <img src="https://img.icons8.com/ios-filled/100/00ffea/rocket--v1.png" alt="Step 1" class="mx-auto my-3" style="width:64px;">
+                    <h5 class="text-info">Step 1</h5>
+                    <p class="mb-2" style="color: white;">Start with <b>Cyber Basics</b></p>
+                    <span class="badge bg-info text-dark mb-3">No Experience Needed</span>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="journey-step card border-0 shadow-lg text-center bg-gradient gsap-card" style="background:linear-gradient(120deg,#101820 60%,#00ffea22 100%);">
+                    <img src="https://img.icons8.com/ios-filled/100/00ffea/brain.png" alt="Step 2" class="mx-auto my-3" style="width:64px;">
+                    <h5 class="text-info">Step 2</h5>
+                    <p class="mb-2" style="color: white;">Hands-on <b>Labs & Quizzes</b></p>
+                    <span class="badge bg-info text-dark mb-3">Practice & Learn</span>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="journey-step card border-0 shadow-lg text-center bg-gradient gsap-card" style="background:linear-gradient(120deg,#101820 60%,#00ffea22 100%);">
+                    <img src="https://img.icons8.com/ios-filled/100/00ffea/medal2--v1.png" alt="Step 3" class="mx-auto my-3" style="width:64px;">
+                    <h5 class="text-info">Step 3</h5>
+                    <p class="mb-2" style="color: white;">Earn <b>Badges & Certificates</b></p>
+                    <span class="badge bg-info text-dark mb-3">Show Your Skills</span>
+                  </div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <div class="journey-step card border-0 shadow-lg text-center bg-gradient gsap-card" style="background:linear-gradient(120deg,#101820 60%,#00ffea22 100%);">
+                    <img src="https://img.icons8.com/ios-filled/100/00ffea/handshake.png" alt="Step 4" class="mx-auto my-3" style="width:64px;">
+                    <h5 class="text-info">Step 4</h5>
+                    <p class="mb-2" style="color: white;">Join <b>Community & Projects</b></p>
+                    <span class="badge bg-info text-dark mb-3">Grow Together</span>
+                  </div> 
+                </div>
+              </div>
+              <!-- Timeline line -->
+              <div class="position-absolute top-50 start-0 w-100" style="height:4px; background:linear-gradient(90deg,#00ffea 0%,#2c5364 100%); opacity:0.3; z-index:0; transform:translateY(-50%);"></div>
+            </div>
+            <div class="row mt-5 align-items-center justify-content-center gsap-fade">
+              <div class="col-md-8 text-center mx-auto">
+                <h3 class="text-info mb-2" style="font-family: 'Orbitron', 'Montserrat', sans-serif; font-size:1.1rem;">Your Cyber Journey Starts Here</h3>
+                <p class="lead" style="font-size:1rem;">Step-by-step, beginner-friendly, and full of real-world learning. No prior experience needed!</p>
+              </div>
+            </div>
+          </div>
+          <style>
+            #beginner-journey .journey-timeline {
+              position: relative;
+              padding-bottom: 2.5rem;
+            }
+            #beginner-journey .journey-step {
+              transition: transform 0.5s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.4s;
+              z-index: 2;
+              background: #101820;
+            }
+            #beginner-journey .journey-step:hover {
+              transform: translateY(-18px) scale(1.05) rotate(-2deg);
+              box-shadow: 0 8px 32px #00ffea99, 0 2px 16px #0008;
+            }
+            #beginner-journey .journey-step img {
+              filter: drop-shadow(0 2px 12px #00ffea88);
+            }
+            @media (max-width: 767.98px) {
+              #beginner-journey .journey-timeline .row > div {
+                margin-bottom: 1.5rem;
+              }
+              #beginner-journey .journey-timeline .position-absolute {
+                display: none;
+              }
+            }
+          </style>
+        </section>
+        <!-- SVG Section Divider: Beginner Journey to Community -->
+        <div style="width:100%;overflow:hidden;line-height:0;position:relative;top:-1px;z-index:2;">
+          <svg viewBox="0 0 1440 80" width="100%" height="80" preserveAspectRatio="none" style="display:block;"><polygon fill="#101820" fill-opacity="1" points="0,0 1440,80 0,80"/></svg>
+        </div>
+        <section id="community" class="py-5 bg-dark text-white text-center" style="z-index:3;">
+            <div class="container">
+                <h2 class="display-5 mb-4 gsap-fade" style="font-family: 'Orbitron', 'Montserrat', sans-serif;">Join Our Community</h2>
+                <p class="lead mb-4">Connect, collaborate, and grow with thousands of cybersecurity learners and professionals.</p>
+                <div class="row justify-content-center align-items-center">
+                  <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80" alt="Community" class="img-fluid rounded shadow-lg gsap-img" style="max-width: 400px; border: 5px solid #fff;">
+                  </div>
+                  <div class="col-md-6 text-start">
+                    <div class="bg-secondary bg-opacity-75 rounded-4 p-4 shadow-lg">
+                      <h4 class="text-info mb-2" style="font-family: 'Orbitron', 'Montserrat', sans-serif;">Support & Networking</h4>
+                      <p class="mb-2">Access 24/7 forums, live events, and mentorship. Share your journey and learn from others in a safe, inclusive space.</p>
+                      <h5 class="text-success mt-4 mb-2">What Our Members Say</h5>
+                      <blockquote class="blockquote text-white-50 mb-0">
+                        <p>“Cyber Academy gave me the skills and confidence to land my dream job in cybersecurity!”</p>
+                        <footer class="blockquote-footer text-white-50">Aisha, Graduate</footer>
+                      </blockquote>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- SVG Section Divider -->
+    <div style="width:100%;overflow:hidden;line-height:0;position:relative;top:-1px;">
+      <svg viewBox="0 0 1440 80" width="100%" height="80" preserveAspectRatio="none" style="display:block;"><polygon fill="#2c5364" fill-opacity="1" points="0,80 1440,0 1440,80"/></svg>
+    </div>
+      <footer class="footer-cyber py-4 mt-5">
+        <div class="container">
+          <div class="row align-items-center gy-3">
+            <div class="col-12 col-md-4 mb-2 mb-md-0 d-flex justify-content-center justify-content-md-start align-items-center gap-2">
+              <img src="https://img.icons8.com/ios-filled/40/00ffea/hacker.png" alt="Cyber Academy Logo" class="footer-logo">
+              <span class="footer-title">Cyber Academy</span>
+            </div>
+            <div class="col-12 col-md-4 mb-2 mb-md-0 text-center">
+              <a href="#about" class="footer-link">About</a>
+              <a href="#courses" class="footer-link">Courses</a>
+              <a href="#community" class="footer-link">Community</a>
+            </div>
+            <div class="col-12 col-md-4 text-md-end text-center">
+              <span class="footer-copyright">&copy; 2025 Cyber Academy. All rights reserved.<br>
+                <span class="footer-founder">Founder: Sanskar</span> &amp; <span class="footer-founder">Co-founder: Harsh</span>
+              </span>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12 text-center">
+          <span class="footer-made">Made with <span class="footer-heart">&#10084;</span> by Cyber Academy</span>
+        </div>
+      </div>
+      <!-- Message System Start -->
+      <div class="row mt-4 justify-content-center">
+        <div class="col-12 col-md-8">
+          <form id="footer-message-form" class="d-flex flex-column flex-md-row align-items-center gap-2 bg-dark bg-opacity-75 p-3 rounded-4 shadow-lg" autocomplete="off">
+            <input type="text" id="footer-message-input" name="message" class="form-control me-md-2 mb-2 mb-md-0" placeholder="Type your message..." maxlength="300" required style="flex:1; min-width:120px;">
+            <button type="submit" class="btn btn-info px-4 fw-bold">Send</button>
+          </form>
+          <div id="footer-message-status" class="mt-2 text-center" style="display:none;"></div>
+        </div>
+      </div>
+      <!-- Message System End -->
+            </div>
+          </div>
+        </div>
+      </footer>
+      <style>
+        .footer-cyber {
+          background: linear-gradient(90deg, #0f2027 0%, #2c5364 100%) !important;
+          border-top: 2px solid #00ffea44;
+          box-shadow: 0 -2px 16px #0004;
+          color: #fff;
+        }
+        .footer-logo {
+          background: #101820;
+          border-radius: 50%;
+          box-shadow: 0 0 12px #00ffea99;
+          width: 40px;
+          height: 40px;
+          padding: 4px;
+        }
+        .footer-title {
+          font-weight: bold;
+          font-size: 1.3rem;
+          letter-spacing: 1.5px;
+          color: #00ffea;
+          text-shadow: 0 2px 12px #00ffea44;
+        }
+        .footer-link {
+          color: #fff !important;
+          font-size: 1.05rem;
+          margin: 0 0.7rem;
+          transition: color 0.2s, text-shadow 0.2s;
+          text-decoration: none;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+        }
+        .footer-link:hover {
+          color: #00ffea !important;
+          text-shadow: 0 0 8px #00ffea99;
+          text-decoration: underline;
+        }
+        .footer-founder {
+          color: #00ffea;
+          font-weight: 600;
+        }
+        .footer-made {
+          font-size: 1rem;
+          color: #fff;
+          letter-spacing: 0.5px;
+        }
+        .footer-heart {
+          color: #00ffea;
+          font-size: 1.1em;
+          vertical-align: middle;
+          text-shadow: 0 0 8px #00ffea99;
+        }
+        .footer-copyright {
+          font-size: 0.98rem;
+          color: #fff;
+        }
+        @media (max-width: 767.98px) {
+          .footer-title { font-size: 1.1rem; }
+          .footer-link { font-size: 0.98rem; margin: 0 0.4rem; }
+          .footer-made { font-size: 0.92rem; }
+        }
+      </style>
+      <style>
+        .footer-cyber {
+          background: linear-gradient(90deg, #0f2027 0%, #2c5364 100%) !important;
+          border-top: 2px solid #00ffea44;
+          box-shadow: 0 -2px 16px #0004;
+        }
+        .footer-cyber a:hover {
+          color: #00ffea !important;
+          text-decoration: underline;
+        }
+      </style>
+    </footer>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+  
+</body>
+</html>
